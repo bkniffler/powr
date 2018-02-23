@@ -1,4 +1,4 @@
-import render from 'powr-render/string';
+import render from './string';
 
 export default ({ ssr = true } = {}) => async (req, res) => {
   const { status, result } = await render(req.originalUrl, { ...req, ssr });

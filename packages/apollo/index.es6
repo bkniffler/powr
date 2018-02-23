@@ -22,19 +22,19 @@ export const resolved = action => `${action}${ACTION_SUFFIX_RESOLVED}`;
 export const plugin = ({ schema } = {}) => ({ store, dynamicRedux }) => {
   if (typeof window !== 'undefined') {
     const { reducer, middleware } = redux({
-      initial: !window.APOLLO_STATE,
+      initial: !window.APOLLO_STATE
     });
     dynamicRedux.inject({ reducer, middleware, name: 'apollo' });
 
     const loader = {
       start: startLoading(store.dispatch),
-      end: stopLoading(store.dispatch),
+      end: stopLoading(store.dispatch)
     };
     const { client } = getApollo({
       loader,
       url: window.GRAPHQL_URL || process.env.GRAPHQL_URL || '/graphql',
       initialData: window.APOLLO_STATE || {},
-      tokenKey: 'access_token',
+      tokenKey: 'access_token'
     });
 
     if (!window.APOLLO_STATE) {
@@ -43,36 +43,35 @@ export const plugin = ({ schema } = {}) => ({ store, dynamicRedux }) => {
     }
 
     return {
-      name: 'powr-apollo',
+      name: '@powr/apollo',
       decorate: App => {
         return props => (
           <ApolloProvider client={client}>
             <App {...props} />
           </ApolloProvider>
         );
-      },
+      }
     };
-  } else {
-    const { cache, client } = getApollo2(schema, context);
-    const { reducer, middleware } = redux({
-      initial: !!window.APOLLO_STATE,
-    });
-    dynamicRedux.inject({ reducer, middleware, name: 'apollo' });
-    return {
-      name: 'powr-apollo',
-      decorate: App => props => (
-        <ApolloProvider client={client}>
-          <App {...props} />
-        </ApolloProvider>
-      ),
-      template: template => {
-        template.body.push(`
+  }
+  const { cache, client } = getApollo2(schema, context);
+  const { reducer, middleware } = redux({
+    initial: !!window.APOLLO_STATE
+  });
+  dynamicRedux.inject({ reducer, middleware, name: 'apollo' });
+  return {
+    name: '@powr/apollo',
+    decorate: App => props => (
+      <ApolloProvider client={client}>
+        <App {...props} />
+      </ApolloProvider>
+    ),
+    template: template => {
+      template.body.push(`
           <script type="text/javascript">
             window.APOLLO_STATE = ${JSON.stringify(cache.data)}
           </script>
         `);
-        return template;
-      },
-    };
-  }
+      return template;
+    }
+  };
 };

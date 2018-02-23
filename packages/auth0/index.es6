@@ -1,4 +1,3 @@
-import { LOCATION_REPLACE, LOCATION_PUSH } from 'powr-router';
 export { default as getAuth } from './get-auth';
 import redux, { SET } from './redux';
 
@@ -16,13 +15,13 @@ export const plugin = (options = {}) => ({ history, store, dynamicRedux }) => {
       domain: options.domain || process.env.AUTH0_DOMAIN,
       clientID: options.clientID || process.env.AUTH0_CLIENT_ID,
       audience: options.audience || process.env.AUTH0_AUDIENCE,
-      scope: options.scope || process.env.AUTH0_SCOPE || 'openid email profile',
+      scope: options.scope || process.env.AUTH0_SCOPE || 'openid email profile'
     };
     const auth0 = new Auth0(config);
-    auth0.on('profile' , payload => {
+    auth0.on('profile', payload => {
       store.dispatch({ type: SET, payload });
     });
-    
+
     const { pathname, query } = store.getState().location;
     let user;
     if (query.state === '/login') {
@@ -42,7 +41,7 @@ export const plugin = (options = {}) => ({ history, store, dynamicRedux }) => {
       } else {
         //  if (query.state || process.env.IS_ELECTRON)
         history.replace(query.state || '/');
-      }/* else {
+      } /* else {
         auth0.login({ state: '/' });
       }*/
     } else {
@@ -51,13 +50,12 @@ export const plugin = (options = {}) => ({ history, store, dynamicRedux }) => {
 
     const { reducer, middleware } = redux({
       auth0,
-      initialState: { user, isAuthenticated: !!user },
+      initialState: { user, isAuthenticated: !!user }
     });
     dynamicRedux.inject({ middleware, reducer, name: 'auth' });
 
     return {};
-  } else {
-    const { reducer, middleware } = redux({});
-    return {};
   }
+  const { reducer, middleware } = redux({});
+  return {};
 };

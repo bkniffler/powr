@@ -30,7 +30,7 @@ const createDynamicRedux = () => {
     // If we get here we have an invalid item in the reducer path.
     throw new Error({
       message: 'Invalid item in reducer tree',
-      item: reducers,
+      item: reducers
     });
   };
 
@@ -55,7 +55,7 @@ const createDynamicRedux = () => {
     dynamicMiddleware: store => next => action => {
       const middlewareAPI = {
         getState: store.getState,
-        dispatch: store.dispatch,
+        dispatch: store.dispatch
       };
       const chain = [...middlewares.values()].map(middleware =>
         middleware(middlewareAPI)
@@ -78,7 +78,7 @@ const createDynamicRedux = () => {
       stores = createStore(combineReducersRecurse(initialReducers), ...args);
       stores.injectedReducers = initialReducers;
       return stores;
-    },
+    }
   };
 };
 export default createDynamicRedux;
@@ -95,12 +95,12 @@ export class DynamicReduxProvider extends Component {
   };
 
   static childContextTypes = {
-    dynamicRedux: PropTypes.object,
+    dynamicRedux: PropTypes.object
   };
 
   getChildContext() {
     return {
-      dynamicRedux: this,
+      dynamicRedux: this
     };
   }
 
@@ -114,12 +114,12 @@ export const withDynamicRedux = ({
   name,
   reducer,
   middleware,
-  init,
+  init
 }) => WrappedComponent => {
   class WithDynamicRedux extends Component {
     static contextTypes = {
       dynamicRedux: PropTypes.object,
-      store: PropTypes.object,
+      store: PropTypes.object
     };
     constructor(props, context) {
       super(props);
@@ -150,7 +150,7 @@ export const plugin = () => {
     composeWithDevTools(applyMiddleware(dynamicMiddleware))
   );
   return {
-    name: 'powr-redux',
+    name: '@powr/redux',
     context: { store, dynamicRedux },
     decorate: App => props => (
       <DynamicReduxProvider dynamicRedux={dynamicRedux}>
@@ -158,6 +158,6 @@ export const plugin = () => {
           <App {...props} />
         </Provider>
       </DynamicReduxProvider>
-    ),
+    )
   };
 };

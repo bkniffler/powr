@@ -1,6 +1,5 @@
-import { withDynamicRedux } from 'powr-redux';
 import { debounce } from 'lodash';
-import immutable from 'powr-redux/immutable';
+import immutable from '@powr/redux/immutable';
 
 export const MANIPULATE = 'APP_MANIPULATE';
 export const LOADER_START = 'APP_LOADER_START';
@@ -14,7 +13,7 @@ export default ({ initial = false } = {}) => {
     serverConnection: true,
     initial,
     internetConnection:
-      typeof window !== 'undefined' ? window.navigator.onLine !== false : true,
+      typeof window !== 'undefined' ? window.navigator.onLine !== false : true
   };
   const reducer = (state = defaultState, action) => {
     if (!action || !action.type) {
@@ -64,14 +63,14 @@ export default ({ initial = false } = {}) => {
 
   return {
     reducer,
-    middleware,
+    middleware
   };
 };
 
 export const createManipulation = dispatch => payload =>
   dispatch({
     type: MANIPULATE,
-    payload,
+    payload
   });
 
 export const createServerConnection = dispatch => payload =>
@@ -86,13 +85,13 @@ const updateLoader = debounce(
       loader = true;
       dispatch({
         type: LOADER_START,
-        payload: null,
+        payload: null
       });
     } else if (!length && loader) {
       loader = false;
       dispatch({
         type: LOADER_END,
-        payload: null,
+        payload: null
       });
     }
   },

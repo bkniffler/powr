@@ -1,5 +1,4 @@
-import { withDynamicRedux } from 'powr-redux';
-import { LOCATION_REPLACE, LOCATION_PUSH } from 'powr-router';
+import { LOCATION_PUSH } from '@powr/router';
 
 export const INIT = 'AUTH_INIT';
 export const LOGIN = 'AUTH_LOGIN';
@@ -17,7 +16,7 @@ export default ({ auth0, initialState = {} }) => {
         return {
           ...state,
           user: action.payload,
-          isAuthenticated: !!action.payload,
+          isAuthenticated: !!action.payload
         };
       default:
         return state;
@@ -32,15 +31,15 @@ export default ({ auth0, initialState = {} }) => {
       dispatch({
         type: LOCATION_PUSH,
         payload: {
-          pathname: '/login',
-        },
+          pathname: '/login'
+        }
       });
     } else if (action.type === LOGOUT) {
       dispatch({
         type: LOCATION_PUSH,
         payload: {
-          pathname: '/logout',
-        },
+          pathname: '/logout'
+        }
       });
     } else if (
       action.type === 'LOCATION_CHANGE' &&
@@ -59,6 +58,6 @@ export default ({ auth0, initialState = {} }) => {
 
   return {
     reducer,
-    middleware,
+    middleware
   };
 };
