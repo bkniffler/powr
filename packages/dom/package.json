@@ -7,5 +7,8 @@
     "Benjamin Kniffler <bkniffler@me.com>",
     "Philipp Achenbach <powr@philipp-achenbach.de>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "@powr/core": "^0.9.1"
+  }
 }
