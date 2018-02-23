@@ -1,0 +1,20 @@
+{
+  "version": "0.9.0",
+  "name": "@powr/router",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <powr@philipp-achenbach.de>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "create-react-class": "^15.6.3",
+    "history": "^4.7.2",
+    "react-redux": "^5.0.6",
+    "react-tappable": "^1.0.2",
+    "recompose": "^0.26.0",
+    "redux": "^3.7.2",
+    "route-parser": "^0.0.5"
+  }
+}

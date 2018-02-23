@@ -1,0 +1,11 @@
+{
+  "version": "0.9.0",
+  "name": "@powr/auth0",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <powr@philipp-achenbach.de>"
+  ],
+  "license": "MIT"
+}

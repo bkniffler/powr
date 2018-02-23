@@ -1,0 +1,15 @@
+{
+  "version": "0.9.0",
+  "name": "@powr/async",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <powr@philipp-achenbach.de>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react-async-bootstrapper": "^1.1.2",
+    "react-async-component": "^1.0.2"
+  }
+}

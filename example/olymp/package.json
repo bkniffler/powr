@@ -1,0 +1,99 @@
+{
+  "version": "20.0.10",
+  "name": "olymp-example",
+  "description": "Olymp",
+  "author": "Benjamin Kniffler <benjamin@diego.one>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <olymp@philipp-achenbach.de>"
+  ],
+  "private": true,
+  "engines": {
+    "node": "^8.7.0",
+    "npm": "^5.5.1"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./node_modules/jest-enzyme/lib/index.js",
+    "unmockedModulePathPatterns": [
+      "react",
+      "enzyme",
+      "jasmine-enzyme"
+    ]
+  },
+  "scripts": {
+    "publish": "git push dev master",
+    "up": "npm-up",
+    "dev": "node index",
+    "prerender": "node prerender",
+    "gql-fake": "GRAPHQL_FAKE=http://localhost:9002/graphql graphql-faker ./server/mock.graphql -e http://localhost:3000/graphql",
+    "build": "olymp build",
+    "start": "olymp start",
+    "heroku-postbuild": "olymp build",
+    "prettier": "prettier-eslint --write --print-width 80 --single-quote --trailing-comma es5 \"app/**/*.js\"",
+    "electron": "GRAPHQL_URL=https://site.com/graphql olymp build --electron",
+    "electron:dev": "olymp dev --electron",
+    "electron:mac": "electron-builder",
+    "electron:win": "electron-builder --win",
+    "electron:win32": "electron-builder --win --ia32",
+    "electron:publish": "yarn run electron && npm version patch -m \"Upgrade to %s for reasons\" --force && electron-builder --publish always --mac --win --ia32 --x64"
+  },
+  "dependencies": {
+    "olymp": "^20.0.10",
+    "olymp-fela": "^20.0.4",
+    "olymp-pwa": "^20.0.10",
+    "olymp-render": "^20.0.10",
+    "olymp-router": "^20.0.5",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  },
+  "devDependencies": {
+    "eslint-config-olymp": "^20.0.1",
+    "olymp-apollo": "^20.0.10",
+    "olymp-webpack-electron": "^20.0.0-14",
+    "recompose": "^0.26.0",
+    "redux-devtools-extension": "^2.13.2"
+  },
+  "electronDependencies": {},
+  "build": {
+    "appId": "olymp.example.app",
+    "productName": "Olymp",
+    "directories": {
+      "app": ".dist/electron",
+      "output": ".dist",
+      "buildResources": "public"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis"
+      ]
+    },
+    "dmg": {
+      "title": "Olymp Example",
+      "backgroundColor": "#8e44ad"
+    },
+    "nsis": {
+      "deleteAppDataOnUninstall": true
+    },
+    "publish": {
+      "provider": "s3",
+      "bucket": "olymp",
+      "path": "updater",
+      "region": "eu-central-1"
+    }
+  },
+  "olymp": {
+    "app": "./app",
+    "server": "./server",
+    "plugins": [],
+    "modifyVars": {
+      "font-size-base": "15px",
+      "primary-color": "#8e44ad"
+    }
+  }
+}

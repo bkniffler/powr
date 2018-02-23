@@ -1,0 +1,20 @@
+{
+  "version": "0.9.0",
+  "name": "@powr/app",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <powr@philipp-achenbach.de>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "react-helmet": "^5.2.0",
+    "recompose": "^0.26.0",
+    "ua-parser-js": "^0.7.17"
+  },
+  "peerDependencies": {
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
+  }
+}
