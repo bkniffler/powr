@@ -9,6 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@powr/core": "^0.9.1"
+    "@powr/core": "^0.9.2"
   }
 }
