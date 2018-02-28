@@ -14,7 +14,6 @@ import App, { plugins } from '__resourceQuery';
 import defaultTemplate from './templates/default';
 import ampTemplate from './templates/amp';
 import inject from './inject';
-import enhance from './root';
 
 var PrettyError = require('pretty-error');
 
@@ -55,7 +54,7 @@ export default async (
         gaTrackingId: GA_TRACKING_ID,
         scripts: isAmp ? [] : js,
         styles: isAmp ? [] : css,
-        buildOn: BUILD_ON,
+        buildOn: BUILD_ON
       });
       return Promise.resolve({ status: 200, result: html });
     }
@@ -65,7 +64,7 @@ export default async (
     const { decorate, bootstrap, template } = inject(plugins);
     const props = {
       ua,
-      isAmp,
+      isAmp
     };
     const Root = decorate(App);
     const reactApp = <Root {...props} />;
@@ -87,7 +86,7 @@ export default async (
       header: templateData.header,
       body: templateData.body,
       initialState: {},
-      gaTrackingId: GA_TRACKING_ID,
+      gaTrackingId: GA_TRACKING_ID
     });
     return { status: 'OK', result: html };
     if (data.location.url !== url) {

@@ -42,7 +42,8 @@ export default class AuthServiceElectron extends AuthService {
     if (email) {
       href = `${href}&email=${email}`;
     }
-    const win = window.open(href, 'oauth');
+
+    window.open(href, 'oauth');
     ipcRenderer.once('oauth-callback', (event, raw) => {
       this.handleAuth(parseQuery(raw.split('?')[1]), verifier);
     });
@@ -54,28 +55,24 @@ export default class AuthServiceElectron extends AuthService {
       localStorage.removeItem(`user_${user.sub}`);
     }
     const { clientID, audience, domain, scope, redirectUri } = this.config;
-    let href = `https://${domain}/v2/logout?client_id=${clientID}&returnTo=${redirectUri}`;
+    const href = `https://${domain}/v2/logout?client_id=${clientID}&returnTo=${redirectUri}`;
     const win = window.open(href, 'oauth');
     ipcRenderer.once('oauth-callback', (event, raw) => {
       this.emit('profile', null);
     });
   };
-  refreshToken = refreshToken => {
-    return fetch(`https://${this.config.domain}/oauth/token`, {
+  refreshToken = refreshToken => fetch(`https://${this.config.domain}/oauth/token`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         grant_type: 'refresh_token',
         client_id: this.config.clientID,
-        refresh_token: refreshToken,
-      }),
+        refresh_token: refreshToken
+      })
     })
       .then(result => result.json())
       .then(this.userInfo);
-  };
-  getRefreshToken = () => {
-    return JSON.parse(localStorage.getItem('user')).refresh_token;
-  };
+  getRefreshToken = () => JSON.parse(localStorage.getItem('user')).refresh_token;
   getProfile = () => {
     const user = this.getUser();
     if (!user) {

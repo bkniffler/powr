@@ -1,0 +1,7 @@
+{
+  "version": "0.9.1",
+  "name": "@powr/plugin",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "license": "MIT"
+}

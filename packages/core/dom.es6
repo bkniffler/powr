@@ -3,7 +3,6 @@ import App, { plugins } from '__resourceQuery';
 import { render, hydrate } from 'react-dom';
 
 import inject from './inject';
-import enhance from './root';
 
 const { decorate, bootstrap } = inject(plugins);
 const container = document.getElementById('app');

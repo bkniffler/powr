@@ -1,6 +1,6 @@
 {
   "private": true,
-  "workspaces": ["packages/*"],
+  "workspaces": ["packages/*", "../alpacka/packages/*"],
   "version": "0.9.0",
   "name": "powr",
   "description": "",

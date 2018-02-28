@@ -1,0 +1,15 @@
+{
+  "version": "0.9.1",
+  "name": "@powr/electron",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "license": "MIT",
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "devtron": "^1.4.0",
+    "electron-debug": "^1.5.0",
+    "electron-log": "^2.2.14",
+    "electron-updater": "^2.20.1",
+    "node-machine-id": "^1.1.10"
+  }
+}
