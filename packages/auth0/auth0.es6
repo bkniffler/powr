@@ -60,7 +60,7 @@ export default class AuthService extends EventEmitter {
     console.log('REFRESH!');
     const { clientID, audience, domain, scope, redirectUri } = this.config;
     return createIFrame(
-      `http://${domain}/authorize?scope=${scope}&audience=${audience}&response_type=code&client_id=${clientID}&redirect_uri=${redirectUri}&state=${state}&prompt=none`
+      `https://${domain}/authorize?scope=${scope}&audience=${audience}&response_type=code&client_id=${clientID}&redirect_uri=${redirectUri}&state=${state}&prompt=none`
     ).then(url => {
       const code = (parseQuery(url.substr(url.indexOf('?'))) || {}).code;
       if (code) {
