@@ -1,13 +1,9 @@
 import React, { Children } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
-  onlyUpdateForKeys,
   compose,
   withPropsOnChange,
   withProps,
-  withContext,
-  getContext,
 } from 'recompose';
 import isMatch from './utils/is-match';
 
@@ -47,7 +43,6 @@ const pathMatcher = ({ pathname, query, children, ...switchRest }) => {
   const routes = Children.toArray(children);
   for (let index = 0; index < routes.length; index++) {
     const route = routes[index];
-    const { displayName } = route.type;
     const { exact, ...rest } = route.props;
     if (route.props.match === true) {
       matched = getChild({ ...switchRest, ...rest, pathname });
@@ -125,7 +120,7 @@ export const Match = props => {
 };
 Match.displayName = 'Match';
 
-/*export const MatchPaths = connect(({ location }, { match, exact }) => ({
+/* export const MatchPaths = connect(({ location }, { match, exact }) => ({
   match: matchPaths(location.pathname, exact, match),
 }))(Match);
 MatchPaths.displayName = 'MatchPaths';
@@ -141,4 +136,4 @@ export const MatchQuery = connect(({ location }, { match }) => ({
 MatchQuery.displayName = 'MatchQuery';
 
 export const MatchPathParams = ({ exact, match, ...rest }) =>
-  Match({ match: true, ...rest });*/
+  Match({ match: true, ...rest }); */

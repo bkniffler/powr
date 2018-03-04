@@ -1,7 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, withPropsOnChange } from 'recompose';
+import { format } from 'date-fns';
 import { upperFirst } from 'lodash';
 import {
   createPush,
@@ -104,17 +104,18 @@ export const withQueryState = (
   { type, defaultValue, replace = false } = {}
 ) => {
   if (!type && defaultValue instanceof Date) {
-    type = PropTypes.instanceOf(Date);
+    type = 'date';
   } else if (!type && defaultValue instanceof Number) {
-    type = PropTypes.number;
+    type = 'number';
   }
   const upper = upperFirst(key);
   const getValue = value => {
-    if (type === PropTypes.instanceOf(Date)) {
-      return { [key]: value ? +value : value };
+    if (type === 'date') {
+      return { [key]: value ? format(value, 'YYYY-MM-DD') : undefined };
     }
     return { [key]: value };
   };
+
   const method = replace ? createReplaceQuery : createUpdateQuery;
   const enhancers = [
     connect(
@@ -126,13 +127,13 @@ export const withQueryState = (
       })
     )
   ];
-  if (type === PropTypes.instanceOf(Date)) {
+  if (type === 'date') {
     enhancers.push(
       withPropsOnChange([key], props => ({
         [key]: props[key] ? new Date(props[key]) : null
       }))
     );
-  } else if (type === PropTypes.number) {
+  } else if (type === 'number') {
     enhancers.push(
       withPropsOnChange([key], props => ({
         [key]: props[key] ? parseInt(props[key]) : null
