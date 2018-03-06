@@ -4,7 +4,7 @@ const babel = require('@alpacka/plugin-babel-react');
 const env = require('@alpacka/plugin-env');
 
 module.exports = (src, args) => (config, props) => {
-  const { statics = [], offline, primaryColor, mode, history } = args;
+  const { statics = [], offline, primaryColor, mode, history, modifyVars = {} } = args;
   const { chain, target } = props;
   config.entry.push('@powr/dom');
   config.resolve.alias.__resourceQuery = src;
@@ -25,7 +25,8 @@ module.exports = (src, args) => (config, props) => {
         'font-family':
           '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
         'font-size-base': '15px',
-        'primary-color': primaryColor || '#8e44ad'
+        'primary-color': primaryColor || '#8e44ad',
+        ...modifyVars
       }
     }),
     babel({
