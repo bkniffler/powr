@@ -1,5 +1,6 @@
-export { default as getAuth } from './get-auth';
 import redux, { SET } from './redux';
+
+export { default as getAuth } from './get-auth';
 
 let Auth0;
 if (process.env.IS_ELECTRON) {
@@ -43,7 +44,7 @@ export const plugin = (options = {}) => ({ history, store, dynamicRedux }) => {
         history.replace(query.state || '/');
       } /* else {
         auth0.login({ state: '/' });
-      }*/
+      } */
     } else {
       user = auth0.getProfile();
     }
