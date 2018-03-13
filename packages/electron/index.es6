@@ -8,8 +8,8 @@ const {
 } = require('electron');
 
 import App from '__resourceQuery';
+import updater from './updater';
 
-const { autoUpdater } = require('electron-updater');
 require('electron-debug')({ enabled: true });
 const log = require('electron-log');
 const { machineIdSync } = require('node-machine-id');
@@ -94,18 +94,6 @@ function createWindow() {
     Menu.setApplicationMenu(menu);
   }
 
-  if (process.env.NODE_ENV === 'production') {
-    log.info('Starting updater..');
-
-    autoUpdater
-      .checkForUpdates()
-      .then(() => {
-        log.info('Promise fulfilled');
-      })
-      .catch(reason => {
-        log.info(`Handle rejected promise (${reason.stack || reason}) here.`);
-      });
-  }
   log.info('Creating browser window');
   // Create the browser window.
   // mainWindow = new BrowserWindow({ width: 800, height: 600, frame: true, titleBarStyle: 'hidden' });
@@ -168,14 +156,10 @@ function createWindow() {
     }
   }
 
+  updater(mainWindow);
+
   log.info('Loading url');
   // and load the index.html of the app.
-  console.log(process.env.INDEX_HTML, process.env.BUILD_ON);
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Updater',
-    message: `${process.env.INDEX_HTML}, ${path.join(__dirname, 'index.html')}`
-  });
   mainWindow.loadURL(
     process.env.INDEX_HTML ||
       url.format({
@@ -248,32 +232,6 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
-
-autoUpdater.on('checking-for-update', () => {
-  log.info('Checking for update...');
-});
-autoUpdater.on('update-available', (ev, info) => {
-  log.info('Update available.', ev, info);
-  dialog.showMessageBox({
-    type: 'info',
-    title: 'Updater',
-    message:
-      'Ein Update wurde gefunden und wird jetzt heruntergeladen/installiert. Das Programm wird sich anschließend automatisch erneut öffnen.'
-  });
-});
-autoUpdater.on('update-not-available', (ev, info) => {
-  log.info('Update not available.', ev, info);
-});
-autoUpdater.on('error', (ev, err) => {
-  log.info('Error in auto-updater.', ev, err);
-});
-autoUpdater.on('download-progress', (ev, progressObj) => {
-  log.info('Download progress...', progressObj);
-});
-autoUpdater.on('update-downloaded', (ev, info) => {
-  log.info('Update downloaded. Will quit and install.');
-  autoUpdater.quitAndInstall();
-});
 
 App(app);
 
