@@ -3,12 +3,14 @@ const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
 export default mainWindow => {
-  ipcMain.on('update-install', () => {
-    log.info('Quit and install...');
-    autoUpdater.quitAndInstall();
-  });
-  ipcMain.on('update-check', () => {
-    autoUpdater.checkForUpdates();
+  ipcMain.on('update', (event, { type }) => {
+    if (type === 'check') {
+      autoUpdater.checkForUpdates();
+    }
+    if (type === 'check') {
+      log.info('Quit and install...');
+      autoUpdater.quitAndInstall();
+    }
   });
 
   // Confirm
