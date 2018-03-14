@@ -6,8 +6,7 @@ export default mainWindow => {
   ipcMain.on('update', (event, { type }) => {
     if (type === 'check') {
       autoUpdater.checkForUpdates();
-    }
-    if (type === 'check') {
+    } else if (type === 'install') {
       log.info('Quit and install...');
       autoUpdater.quitAndInstall();
     }

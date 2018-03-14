@@ -8,6 +8,6 @@
     "@alpacka/plugin-babel-react": "^0.10.4",
     "@alpacka/plugin-env": "^0.10.5",
     "@alpacka/plugin-less": "^0.10.4",
-    "@alpacka/plugin-web": "^0.10.4"
+    "@alpacka/plugin-web": "^0.10.8"
   }
 }
