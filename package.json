@@ -39,7 +39,7 @@
   "devDependencies": {
     "@alpacka/cli": "^0.12.3",
     "@alpacka/eslint-config": "^0.12.0",
-    "lerna": "^3.0.0-alpha.1"
+    "lerna": "^2.9.0"
   },
   "xy": {
     "jest": "^22.3.0"
