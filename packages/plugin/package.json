@@ -7,7 +7,7 @@
   "dependencies": {
     "@alpacka/plugin-babel-react": "^0.12.4",
     "@alpacka/plugin-env": "^0.12.0",
-    "@alpacka/plugin-less": "^0.12.0",
+    "@alpacka/plugin-less": "^0.12.5",
     "@alpacka/plugin-web": "^0.12.0"
   }
 }
