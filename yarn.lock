@@ -74,9 +74,9 @@
   dependencies:
     dotenv "^5.0.1"
 
-"@alpacka/plugin-less@^0.12.5":
-  version "0.12.5"
-  resolved "https://registry.npmjs.org/@alpacka/plugin-less/-/plugin-less-0.12.5.tgz#b22460d8d5480c142234c22c8bde19b481f7441d"
+"@alpacka/plugin-less@^0.12.6":
+  version "0.12.6"
+  resolved "https://registry.npmjs.org/@alpacka/plugin-less/-/plugin-less-0.12.6.tgz#86b7de493ce1fbee9991d216b131931200ac9efc"
   dependencies:
     cache-loader "^1.2.2"
     css-loader "^0.28.10"
