@@ -37,7 +37,7 @@
   "homepage": "https://github.com/bkniffler/powr#readme",
   "dependencies": {},
   "devDependencies": {
-    "@alpacka/cli": "^0.12.3",
+    "@alpacka/cli": "^0.12.14",
     "@alpacka/eslint-config": "^0.12.0",
     "lerna": "^2.9.0"
   },
