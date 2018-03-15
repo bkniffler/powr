@@ -5,7 +5,7 @@ const log = require('electron-log');
 export default mainWindow => {
   ipcMain.on('update', (event, { type }) => {
     if (type === 'check') {
-      autoUpdater.checkForUpdates();
+      autoUpdater.checkForUpdatesAndNotify();
     } else if (type === 'install') {
       log.info('Quit and install...');
       autoUpdater.quitAndInstall();
