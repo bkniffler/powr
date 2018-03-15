@@ -1,13 +1,13 @@
 {
-  "version": "0.11.0",
+  "version": "0.12.0",
   "name": "@powr/plugin",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "license": "MIT",
   "dependencies": {
-    "@alpacka/plugin-babel-react": "^0.11.0",
-    "@alpacka/plugin-env": "^0.11.0",
-    "@alpacka/plugin-less": "^0.11.0",
-    "@alpacka/plugin-web": "^0.11.0"
+    "@alpacka/plugin-babel-react": "^0.12.3",
+    "@alpacka/plugin-env": "^0.12.0",
+    "@alpacka/plugin-less": "^0.12.0",
+    "@alpacka/plugin-web": "^0.12.0"
   }
 }
