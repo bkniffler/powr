@@ -4,7 +4,14 @@ const babel = require('@alpacka/plugin-babel-react');
 const env = require('@alpacka/plugin-env');
 
 module.exports = (src, args) => (config, props) => {
-  const { statics = [], offline, primaryColor, mode, history, modifyVars = {} } = args;
+  const {
+    statics = [],
+    offline,
+    primaryColor,
+    mode,
+    history,
+    modifyVars = {}
+  } = args;
   const { chain, target } = props;
   config.entry.push('@powr/dom');
   config.resolve.alias.__resourceQuery = src;
@@ -29,9 +36,7 @@ module.exports = (src, args) => (config, props) => {
         ...modifyVars
       }
     }),
-    babel({
-      include: src
-    }),
+    babel(),
     web({
       template: '@powr/template',
       statics,
