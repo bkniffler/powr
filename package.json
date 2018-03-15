@@ -8,7 +8,7 @@
   "description": "",
   "scripts": {
     "test": "jest",
-    "watch": "alpacka watch -c babel-react",
+    "watch": "alpacka watch",
     "codecov": "codecov",
     "up": "yarn upgrade-interactive --latest",
     "init": "lerna init --independent",
@@ -37,10 +37,11 @@
   "homepage": "https://github.com/bkniffler/powr#readme",
   "dependencies": {},
   "devDependencies": {
-    "@alpacka/cli": "^0.11.0",
-    "@alpacka/eslint-config": "^0.11.0",
-    "@alpacka/plugin-babel-react": "^0.11.0",
-    "jest": "^22.3.0",
+    "@alpacka/cli": "^0.12.3",
+    "@alpacka/eslint-config": "^0.12.0",
     "lerna": "^3.0.0-alpha.1"
+  },
+  "xy": {
+    "jest": "^22.3.0"
   }
 }
