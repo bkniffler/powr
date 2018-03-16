@@ -1,11 +1,11 @@
-const { ipcMain } = require('electron');
+const { ipcMain, Notification } = require('electron');
 const { autoUpdater } = require('electron-updater');
 const log = require('electron-log');
 
 export default mainWindow => {
   ipcMain.on('update', (event, { type }) => {
     if (type === 'check') {
-      autoUpdater.checkForUpdatesAndNotify();
+      autoUpdater.checkForUpdates();
     } else if (type === 'install') {
       log.info('Quit and install...');
       autoUpdater.quitAndInstall();
@@ -47,6 +47,13 @@ export default mainWindow => {
   });
   autoUpdater.on('update-downloaded', (ev, data) => {
     log.info('Update downloaded. Will quit and install.');
+    const myNotification = new Notification('Update installiert', {
+      body: 'Hier klicken, um das Programm neu zu starten.'
+    });
+    myNotification.onclick = () => {
+      log.info('Quit and install...');
+      autoUpdater.quitAndInstall();
+    };
     // autoUpdater.quitAndInstall();
     mainWindow.webContents.send('update', { type: 'downloaded', data });
     mainWindow.webContents.send('update-downloaded', data);
