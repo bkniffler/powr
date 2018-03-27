@@ -19,8 +19,7 @@ module.exports = (src, args) => (config, props) => {
 
   if (target === 'electron-renderer') {
     config.resolve.alias.superagent = 'superagent/superagent';
-    config.resolve.alias['cross-fetch/polyfill'] =
-      'cross-fetch/dist/browser-polyfill';
+    config.resolve.alias['cross-fetch/polyfill'] = 'cross-fetch/dist/browser-polyfill';
   }
 
   return chain(config, [

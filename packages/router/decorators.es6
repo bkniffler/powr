@@ -99,6 +99,7 @@ export const withRouter = WrappedComponent => {
   )(inner);
 };
 
+const empty = [];
 export const withQueryState = (
   key,
   { type, defaultValue, replace = false } = {}
@@ -107,11 +108,15 @@ export const withQueryState = (
     type = 'date';
   } else if (!type && defaultValue instanceof Number) {
     type = 'number';
+  } else if (!type && Array.isArray(defaultValue)) {
+    type = 'array';
   }
   const upper = upperFirst(key);
   const getValue = value => {
     if (type === 'date') {
       return { [key]: value ? format(value, 'YYYY-MM-DD') : undefined };
+    } else if (type === 'array') {
+      return { [key]: value ? value.join('!') : undefined };
     }
     return { [key]: value };
   };
@@ -137,6 +142,12 @@ export const withQueryState = (
     enhancers.push(
       withPropsOnChange([key], props => ({
         [key]: props[key] ? parseInt(props[key]) : null
+      }))
+    );
+  } else if (type === 'array') {
+    enhancers.push(
+      withPropsOnChange([key], props => ({
+        [key]: props[key] ? props[key].split('!') : empty
       }))
     );
   }

@@ -23,6 +23,7 @@ export default class AuthService extends EventEmitter {
       this.refreshToken();
       return null;
     }
+    user.accessToken = access_token;
     return user.profile;
   };
 
@@ -69,44 +70,43 @@ export default class AuthService extends EventEmitter {
     });
   };
 
-  handleAuth = ({ code }, verifier) => {
-    return fetch(`https://${this.config.domain}/oauth/token`, {
+  handleAuth = ({ code }, verifier) =>
+    fetch(`https://${this.config.domain}/oauth/token`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
         grant_type: 'authorization_code',
         client_id: this.config.clientID,
         code_verifier: verifier,
-        code: code,
-        redirect_uri: this.config.redirectUri,
-      }),
+        code,
+        redirect_uri: this.config.redirectUri
+      })
     })
       .then(result => result.json())
       .then(this.userInfo);
-  };
 
-  userInfo = args => {
-    return fetch(`https://${this.config.domain}/userinfo`, {
+  userInfo = args =>
+    fetch(`https://${this.config.domain}/userinfo`, {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        access_token: args.access_token,
-      }),
+        access_token: args.access_token
+      })
     })
       .then(result => result.json())
       .then(profile => this.storeAuthResult({ ...args, profile }));
-  };
 
   storeAuthResult = ({ access_token, expires_in, refresh_token, profile }) => {
     const user = JSON.stringify({
       access_token,
       expires_at: expires_in * 1000 + new Date().getTime(),
       refresh_token,
-      profile,
+      profile
     });
     localStorage.setItem(`user_${profile.sub}`, user);
     localStorage.setItem('user', user);
     localStorage.setItem('access_token', access_token);
+    profile.accessToken = access_token;
     this.emit('profile', profile);
   };
 

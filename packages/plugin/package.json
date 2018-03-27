@@ -4,6 +4,12 @@
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "license": "MIT",
+  "devDependencies": {
+    "@alpacka/plugin-babel-react": "^0.12.17",
+    "@alpacka/plugin-env": "^0.12.0",
+    "@alpacka/plugin-less": "^0.12.17",
+    "@alpacka/plugin-web": "^0.12.0"
+  },
   "peerDependencies": {
     "@alpacka/plugin-babel-react": "^0.12.7",
     "@alpacka/plugin-env": "^0.12.0",
