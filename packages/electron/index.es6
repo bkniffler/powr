@@ -8,6 +8,7 @@ const {
 } = require('electron');
 
 import App from '__resourceQuery';
+import print from './print';
 import updater from './updater';
 
 require('electron-debug')({ enabled: true });
@@ -156,7 +157,10 @@ function createWindow() {
     }
   }
 
-  updater(mainWindow);
+  if (process.env.NODE_ENV === 'production') {
+    updater(mainWindow);
+  }
+  print(app);
 
   log.info('Loading url');
   // and load the index.html of the app.
@@ -233,7 +237,7 @@ app.on('activate', () => {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-App(app);
+App(app, mainWindow);
 
 /* process.on('uncaughtException', err => {
 console.error(
