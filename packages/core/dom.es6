@@ -14,7 +14,12 @@ const renderApp = async Component => {
   method(app, container);
 };
 
-renderApp(decorate(App));
+if (window.cordova) {
+  document.addEventListener('deviceready', () => renderApp(decorate(App)), false);
+} else {
+  renderApp(decorate(App));
+}
+
 
 if (module.hot && typeof module.hot.accept === 'function') {
   module.hot.accept('__resourceQuery', () => {

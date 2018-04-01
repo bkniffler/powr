@@ -1,0 +1,20 @@
+{
+  "version": "0.12.0",
+  "name": "@powr/rx",
+  "description": "",
+  "author": "Benjamin Kniffler <bkniffler@me.com>",
+  "contributors": [
+    "Benjamin Kniffler <bkniffler@me.com>",
+    "Philipp Achenbach <powr@philipp-achenbach.de>"
+  ],
+  "dependencies": {
+    "pouchdb-adapter-http": "^6.4.3",
+    "pouchdb-adapter-idb": "^6.4.3",
+    "pouchdb-adapter-websql": "^6.4.3",
+    "pouchdb-authentication": "^1.1.2",
+    "pouchdb-core": "^6.4.3",
+    "rxdb": "^7.4.2",
+    "rxjs": "^5.5.8"
+  },
+  "license": "MIT"
+}
