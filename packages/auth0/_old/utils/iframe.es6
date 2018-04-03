@@ -1,5 +1,5 @@
-export default (url, timeout = 60 * 1000) =>
-  new Promise((yay, nay) => {
+export default (url, timeout = 60 * 1000) => {
+  return new Promise((yay, nay) => {
     const destroy = () => {
       clearTimeout(timeoutHandle);
       window.iframeDidLoad = null;
@@ -23,3 +23,4 @@ export default (url, timeout = 60 * 1000) =>
       nay();
     }, timeout);
   });
+};
