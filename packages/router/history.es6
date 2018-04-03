@@ -1,9 +1,10 @@
 import isStandalone from './is-standalone';
+
 let historyCreator = null;
 
-if (process.env.IS_NODE || isStandalone) {
+if (process.env.IS_NODE) {
   historyCreator = require('history/createMemoryHistory').default;
-} else if (process.env.IS_SERVERLESS) {
+} else if (true || process.env.IS_SERVERLESS || isStandalone) {
   historyCreator = require('history/createHashHistory').default;
 } else {
   historyCreator = require('history/createBrowserHistory').default;

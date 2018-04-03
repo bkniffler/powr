@@ -15,11 +15,14 @@ const renderApp = async Component => {
 };
 
 if (window.cordova) {
-  document.addEventListener('deviceready', () => renderApp(decorate(App)), false);
+  document.addEventListener(
+    'deviceready',
+    () => renderApp(decorate(App)),
+    false
+  );
 } else {
   renderApp(decorate(App));
 }
-
 
 if (module.hot && typeof module.hot.accept === 'function') {
   module.hot.accept('__resourceQuery', () => {

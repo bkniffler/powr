@@ -7,6 +7,7 @@ module.exports = (src, args) => (config, props) => {
   const {
     statics = [],
     offline,
+    uglify,
     primaryColor,
     mode,
     history,
@@ -19,7 +20,8 @@ module.exports = (src, args) => (config, props) => {
 
   if (target === 'electron-renderer') {
     config.resolve.alias.superagent = 'superagent/superagent';
-    config.resolve.alias['cross-fetch/polyfill'] = 'cross-fetch/dist/browser-polyfill';
+    config.resolve.alias['cross-fetch/polyfill'] =
+      'cross-fetch/dist/browser-polyfill';
   }
 
   return chain(config, [
@@ -35,7 +37,9 @@ module.exports = (src, args) => (config, props) => {
         ...modifyVars
       }
     }),
-    babel(),
+    babel({
+      uglify
+    }),
     web({
       template: '@powr/template',
       statics,

@@ -16,14 +16,14 @@ export default ({
   getInitialState,
   gaTrackingId,
   asyncState,
-  buildOn,
+  buildOn
 }) => `
 <!DOCTYPE html>
 <html lang="de">
   <head>
     <meta charset="utf-8">
     ${buildOn ? `<meta name="build-on" content="${buildOn}">` : ''}
-    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta http-equiv="Content-Language" content="de" />
     <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
