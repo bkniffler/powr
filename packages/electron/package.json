@@ -5,11 +5,11 @@
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "license": "MIT",
   "dependencies": {
-    "@babel/polyfill": "^7.0.0-beta.42",
+    "@babel/polyfill": "^7.0.0-beta.44",
     "devtron": "^1.4.0",
     "electron-debug": "^1.5.0",
     "electron-log": "^2.2.14",
-    "electron-updater": "^2.21.3",
+    "electron-updater": "^2.21.4",
     "node-machine-id": "^1.1.10"
   }
 }
