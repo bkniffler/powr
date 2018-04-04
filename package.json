@@ -1,9 +1,6 @@
 {
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "../alpacka/packages/*"
-  ],
+  "workspaces": ["packages/*", "../alpacka/packages/*"],
   "version": "0.9.0",
   "name": "powr",
   "description": "",
@@ -23,13 +20,7 @@
     "type": "git",
     "url": "https://github.com/bkniffler/powr.git"
   },
-  "keywords": [
-    "react",
-    "universal",
-    "javascript",
-    "express",
-    "webpack"
-  ],
+  "keywords": ["react", "universal", "javascript", "express", "webpack"],
   "author": "Benjamin Kniffler <bkniffler@me.com>",
   "license": "MIT",
   "bugs": {

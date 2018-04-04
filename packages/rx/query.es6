@@ -27,7 +27,7 @@ queryMethods.forEach(key => {
   queryObj[key] = () => queryObj;
 });
 
-const query = (query, project) => {
+const createQuery = (query, project) => {
   if (typeof query !== 'object') {
     query = {
       docs: query
@@ -108,10 +108,10 @@ const query = (query, project) => {
   return RxConnect;
 };
 
-query.enhance = (...args) => Wrapped => {
-  const Query = query(...args);
+createQuery.enhance = (...args) => Wrapped => {
+  const Query = createQuery(...args);
   return props => <Query>{p => <Wrapped {...props} {...p} />}</Query>;
 };
 
-export const { enhance } = query.enhance;
-export default query;
+export const { enhance } = createQuery.enhance;
+export default createQuery;

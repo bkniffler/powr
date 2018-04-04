@@ -5,7 +5,7 @@ import extractCode from '../utils/extract-code';
 import parseQuery from '../utils/parse-query';
 
 export default class AuthService {
-  _lastUser = null;
+  _lastUser = undefined;
   mode = 'token';
   onChange = user => {
     if (this._onChange) {
@@ -42,6 +42,25 @@ export default class AuthService {
   };
 
   logout = ({ state }) => {
+    const { clientID, domain, logoutUri } = this.config;
+    let href = `https://${domain}/v2/logout?client_id=${clientID}&returnTo=${logoutUri}`;
+    if (state) {
+      href = `${href}&state=${state}`;
+    }
+    return createIFrame(href)
+      .then(url => {
+        console.log('DONE', url);
+        const user = this.getStoredUser();
+        if (user) {
+          localStorage.removeItem('auth');
+        }
+        this.onChange(null);
+      })
+      .catch(err => {
+        console.error('Error in iFrame', err);
+      });
+
+    /*
     const user = this.getStoredUser();
     if (user) {
       localStorage.removeItem('auth');
@@ -52,25 +71,15 @@ export default class AuthService {
       href = `${href}&state=${state}`;
     }
     window.location.replace(href);
-    return Promise.resolve();
+    return Promise.resolve(); */
   };
 
-  login = ({
-    code,
-    email,
-    state,
-    access_token,
-    expires_in,
-    refresh_token
-  } = {}) => {
+  login = (args = {}) => {
+    const { code, email, state } = args;
     if (code) {
-      return this.handleAuthByCode({ code });
-    } else if (access_token) {
-      return this.handleAuthByToken({
-        access_token,
-        expires_in,
-        refresh_token
-      });
+      return this.handleAuthByCode(args);
+    } else if (args.access_token) {
+      return this.handleAuthByToken(args);
     }
     const { clientID, audience, domain, scope, redirectUri } = this.config;
     let href = `https://${domain}/authorize?scope=${scope}&audience=${audience}&response_type=token&client_id=${clientID}&redirect_uri=${redirectUri}`;
@@ -132,16 +141,14 @@ export default class AuthService {
       .then(result => result.json())
       .then(profile => {
         const expiresAt = +new Date() + parseInt(expires_in) * 1000;
-        localStorage.setItem(
-          'auth',
-          JSON.stringify({
-            ...profile,
-            accessToken: access_token,
-            refreshToken: refresh_token,
-            expiresAt
-          })
-        );
-        this.onChange(profile);
+        const user = {
+          ...profile,
+          accessToken: access_token,
+          refreshToken: refresh_token,
+          expiresAt
+        };
+        localStorage.setItem('auth', JSON.stringify(user));
+        this.onChange(user);
         this.loaded = true;
       });
 
