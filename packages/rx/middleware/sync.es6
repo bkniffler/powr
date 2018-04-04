@@ -6,7 +6,7 @@ export default {
   execute: (collection, options = {}, { accessToken } = {}) => {
     if (options.pull || options.push) {
       const syncName = (options.syncTo || collection.name).split('/').join('-');
-      const remote = new PouchDB(`${url}${syncName}`, {
+      const remote = new PouchDB(`${url}/${syncName}`, {
         // skip_setup: true,
         ajax: {
           headers: accessToken

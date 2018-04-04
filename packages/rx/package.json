@@ -11,7 +11,6 @@
     "pouchdb-adapter-http": "^6.4.3",
     "pouchdb-adapter-idb": "^6.4.3",
     "pouchdb-adapter-websql": "^6.4.3",
-    "pouchdb-authentication": "^1.1.2",
     "pouchdb-core": "^6.4.3",
     "rxdb": "^7.4.2",
     "rxjs": "^5.5.8"

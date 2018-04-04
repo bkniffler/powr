@@ -1,9 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Observable } from 'rxjs/Observable';
-import { methods } from './provider';
+import { combineLatest } from 'rxjs/observable/combineLatest';
+import { map } from 'rxjs/operators';
 
-const queryMethods = [...methods, 'where', 'lte', 'gte'];
+const queryMethods = [
+  'insert',
+  'newDocument',
+  'upsert',
+  'atomicUpsert',
+  'find',
+  'findOne',
+  'dump',
+  'destroy',
+  'importDump',
+  'sync',
+  'remove',
+  'where',
+  'lte',
+  'gte',
+  'in',
+  'eq'
+];
 
 const queryObj = {};
 queryMethods.forEach(key => {
@@ -21,12 +38,16 @@ const query = (query, project) => {
   const keys = Object.keys(query);
 
   const usedCollections = [];
-  keys.forEach(key =>
-    query[key](name => {
-      usedCollections.push(name);
-      return queryObj;
-    }, {})
-  );
+  keys.forEach(key => {
+    if (typeof query[key] === 'function') {
+      query[key](name => {
+        usedCollections.push(name);
+        return queryObj;
+      }, {});
+    } else if (typeof query[key] === 'string') {
+      usedCollections.push(key);
+    }
+  });
 
   class RxConnect extends Component {
     static contextTypes = {
@@ -50,27 +71,33 @@ const query = (query, project) => {
       }
 
       await Promise.all(usedCollections.map(key => collection(key)));
-      const all = keys.map(key => query[key](collection, props));
+      const all = keys.map(key => {
+        if (typeof query[key] === 'function') {
+          return query[key](collection, props);
+        }
+        return query[key];
+      });
       const args = all.map(value => {
         let observable = value && value.$ ? value.$ : value;
         if (props.json) {
-          observable = observable.map(x => JSON.parse(JSON.stringify(x)));
+          observable = observable.pipe(map(x => JSON.parse(JSON.stringify(x))));
         }
         return observable;
       });
 
       if (args.filter(x => !x).length > 0) {
-        return setTimeout(() => this.start(props), 100);
-      }
-      const comb = Observable.combineLatest(...args.filter(x => x));
-      this.sub = comb.subscribe(newArgs => {
-        const newProps = {};
-        newArgs.map((x, i) => {
-          newProps[keys[i]] = x || undefined;
+        setTimeout(() => this.start(props), 100);
+      } else {
+        const comb = combineLatest(...args.filter(x => x));
+        this.sub = comb.subscribe(newArgs => {
+          const newProps = {};
+          newArgs.map((x, i) => {
+            newProps[keys[i]] = x || undefined;
+          });
+          const result = project(newProps);
+          this.setState(result);
         });
-        const result = project(newProps);
-        this.setState(result);
-      });
+      }
     };
 
     render() {

@@ -4,21 +4,6 @@ import PropTypes from 'prop-types';
 import RxDB, { QueryChangeDetector } from 'rxdb';
 import { message, time, sync } from './middleware';
 
-export const methods = [
-  '$',
-  'insert',
-  'newDocument',
-  'upsert',
-  'atomicUpsert',
-  'find',
-  'findOne',
-  'dump',
-  'destroy',
-  'importDump',
-  'sync',
-  'remove'
-];
-
 QueryChangeDetector.enable();
 
 RxDB.plugin(require('pouchdb-adapter-http'));
@@ -54,7 +39,7 @@ export default class DB extends Component {
   }
 
   componentWillUnmount() {
-    this.destroyAll();
+    // this.destroyAll();
   }
 
   initializeDB = (props = this.props) => {
@@ -122,6 +107,7 @@ export default class DB extends Component {
         .then(collection => {
           this.proxies[key] = collection;
           this.applyMiddleware(schema, collection, { accessToken });
+          return collection;
         });
     }
     return this.proxies[key];

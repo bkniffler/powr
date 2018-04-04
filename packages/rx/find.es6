@@ -11,12 +11,8 @@ export default class Find extends Component {
   subs = [];
   async componentDidMount(props = this.props) {
     const { collection } = this.context;
-    const query = props.query || (x => x);
-    base = collection;
-    if (props.type) {
-      base = collection(props.type).find();
-    }
-    let res = query(base, props);
+    const col = await collection(props.type);
+    let res = col.find();
     if (res.$) {
       res = res.$;
     }
@@ -41,9 +37,8 @@ export default class Find extends Component {
     const reactTo = newProps.reactTo;
     if (
       this.props.collection !== newProps.collection ||
-      this.props.query !== newProps.query ||
       this.props.type !== newProps.type ||
-      !shallowEqual(newProps, this.props, reactTo || Object.keys(newProps))
+      !shallowEqual(newProps, this.props)
     ) {
       this.componentDidMount(newProps);
     }
@@ -53,6 +48,7 @@ export default class Find extends Component {
   }
   render() {
     const { children, map } = this.props;
+
     if (!children) {
       return null;
     }
@@ -69,8 +65,8 @@ export default class Find extends Component {
   }
 }
 
-export const find = (query, reactTo, as = 'docs') => Wrapped => props => (
-  <Find {...props} query={query} reactTo={reactTo}>
+export const find = (type, reactTo, as = 'docs') => Wrapped => props => (
+  <Find {...props} type={type} reactTo={reactTo}>
     {docs => createElement(Wrapped, { ...props, [as]: docs })}
   </Find>
 );
