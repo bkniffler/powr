@@ -1,5 +1,5 @@
 {
-  "version": "0.12.7",
+  "version": "0.12.9",
   "name": "@powr/auth0",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -7,6 +7,5 @@
     "Benjamin Kniffler <bkniffler@me.com>",
     "Philipp Achenbach <powr@philipp-achenbach.de>"
   ],
-  "license": "MIT",
-  "dependencies": {}
+  "license": "MIT"
 }

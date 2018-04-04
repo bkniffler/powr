@@ -1,5 +1,5 @@
 {
-  "version": "0.12.0",
+  "version": "0.12.9",
   "name": "@powr/dom",
   "description": "",
   "author": "Benjamin Kniffler <bkniffler@me.com>",
@@ -9,6 +9,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@powr/core": "^0.12.0"
+    "@powr/core": "^0.12.9"
   }
 }
