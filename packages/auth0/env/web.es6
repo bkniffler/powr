@@ -110,6 +110,22 @@ export default class AuthService {
       window.addEventListener('message', e => {
         console.log(e);
         win.close();
+        if (
+          navigator.userAgent.match(/iPhone/i) ||
+          navigator.userAgent.match(/iPad/i)
+        ) {
+          let viewportmeta = document.querySelector('meta[name="viewport"]');
+          if (viewportmeta) {
+            viewportmeta.setAttribute(
+              'content',
+              'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0'
+            );
+            viewportmeta.setAttribute(
+              'content',
+              'width=device-width, minimum-scale=1.0, initial-scale=1.0'
+            );
+          }
+        }
       });
       /* const timer = setInterval(() => {
         if (win.closed) {

@@ -14,8 +14,7 @@ const renderApp = async Component => {
   method(app, container);
 };
 
-if (window.self !== window.top) {
-} else if (window.cordova) {
+if (window.cordova) {
   document.addEventListener(
     'deviceready',
     () => renderApp(decorate(App)),
