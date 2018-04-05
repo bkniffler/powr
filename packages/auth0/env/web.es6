@@ -94,7 +94,7 @@ export default class AuthService {
       href = `${href}&email=${email}`;
     }
     if (isWebApp) {
-      // href = `${href}&state=__silent`;
+      href = `${href}&state=__silent`;
       return createIFrame(encodeURI(href), true)
         .then(url => {
           const query = parseQuery(new URL(url).hash.substr(2));
@@ -106,27 +106,6 @@ export default class AuthService {
         .catch(err => {
           console.error(err);
         });
-      const win = window.open(href, '_system');
-      window.addEventListener('message', e => {
-        console.log(e);
-        win.close();
-        if (
-          navigator.userAgent.match(/iPhone/i) ||
-          navigator.userAgent.match(/iPad/i)
-        ) {
-          let viewportmeta = document.querySelector('meta[name="viewport"]');
-          if (viewportmeta) {
-            viewportmeta.setAttribute(
-              'content',
-              'width=device-width, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0'
-            );
-            viewportmeta.setAttribute(
-              'content',
-              'width=device-width, minimum-scale=1.0, initial-scale=1.0'
-            );
-          }
-        }
-      });
       /* const timer = setInterval(() => {
         if (win.closed) {
           clearInterval(timer);
