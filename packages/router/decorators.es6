@@ -128,7 +128,8 @@ export const withQueryState = (
         [key]: location.query[key]
       }),
       dispatch => ({
-        [`update${upper}`]: value => method(dispatch)(getValue(value))
+        [`update${upper}`]: value => method(dispatch)(getValue(value)),
+        [`remove${upper}`]: () => method(dispatch)(getValue(undefined))
       })
     )
   ];

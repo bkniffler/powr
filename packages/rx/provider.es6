@@ -16,8 +16,14 @@ if (process.env.IS_ELECTRON) {
   RxDB.plugin(require('pouchdb-adapter-node-websql'));
   adapter = 'websql';
 } else {
+  const ua = window.navigator.userAgent;
+  const iOS = !!ua.match(/iPad/i) || !!ua.match(/iPhone/i);
+  const webkit = !!ua.match(/WebKit/i);
+  const iOSSafari = iOS && webkit && !ua.match(/CriOS/i);
+
+  RxDB.plugin(require('pouchdb-adapter-websql'));
   RxDB.plugin(require('pouchdb-adapter-idb'));
-  adapter = 'idb';
+  adapter = iOSSafari || window.navigator.standalone ? 'websql' : 'idb';
 }
 
 export default class DB extends Component {
@@ -46,7 +52,6 @@ export default class DB extends Component {
     const { dbName = 'data' } = props;
     this.db = RxDB.create({
       name: p ? `${p}/${dbName}.db` : dbName,
-      // iOSSafari ? 'websql' : 'idb',
       adapter,
       multiInstance: true,
       ignoreDuplicate: true

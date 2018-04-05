@@ -4,6 +4,10 @@ import createIFrame from '../utils/iframe';
 import extractCode from '../utils/extract-code';
 import parseQuery from '../utils/parse-query';
 
+const isInWebAppiOS = window.navigator.standalone == true;
+const isInWebAppChrome = window.matchMedia('(display-mode: standalone)')
+  .matches;
+const isWebApp = true || isInWebAppiOS || isInWebAppChrome;
 export default class AuthService {
   _lastUser = undefined;
   mode = 'token';
@@ -16,7 +20,7 @@ export default class AuthService {
       this._onChange(user);
     }
   };
-  constructor(onChange, config) {
+  constructor(onChange, config, loader) {
     this._onChange = onChange;
     if (!config.redirectUri) {
       config.redirectUri = `${window.location.origin}`;
@@ -25,6 +29,7 @@ export default class AuthService {
       config.logoutUri = `${window.location.origin}`;
     }
     this.config = config;
+    this.loader = loader;
   }
   destroy = () => {
     this._onChange = null;
@@ -47,17 +52,19 @@ export default class AuthService {
     if (state) {
       href = `${href}&state=${state}`;
     }
+    this.loader.start('logout');
     return createIFrame(href)
       .then(url => {
-        console.log('DONE', url);
         const user = this.getStoredUser();
         if (user) {
           localStorage.removeItem('auth');
         }
         this.onChange(null);
+        this.loader.stop();
       })
       .catch(err => {
         console.error('Error in iFrame', err);
+        this.loader.stop();
       });
 
     /*
@@ -86,6 +93,36 @@ export default class AuthService {
     if (email) {
       href = `${href}&email=${email}`;
     }
+    if (isWebApp) {
+      // href = `${href}&state=__silent`;
+      return createIFrame(encodeURI(href), true)
+        .then(url => {
+          const query = parseQuery(new URL(url).hash.substr(2));
+          if (!query.access_token) {
+            return;
+          }
+          return this.handleAuthByToken(query);
+        })
+        .catch(err => {
+          console.error(err);
+        });
+      const win = window.open(href, '_system');
+      window.addEventListener('message', e => {
+        console.log(e);
+        win.close();
+      });
+      /* const timer = setInterval(() => {
+        if (win.closed) {
+          clearInterval(timer);
+          const query = parseQuery(new URL(win.location.href).hash.substr(2));
+          if (!query.access_token) {
+            return;
+          }
+          return this.handleAuthByToken(query);
+        }
+      }, 250); */
+      return Promise.resolve();
+    }
     if (state) {
       href = `${href}&state=${state}`;
     }
@@ -96,6 +133,7 @@ export default class AuthService {
   refreshToken = ({ timeout = 10000, state = '/__silent' } = {}) => {
     const { clientID, audience, domain, scope, redirectUri } = this.config;
     const type = 'token';
+    this.loader.start('refresh');
     return createIFrame(
       `https://${domain}/authorize?scope=${scope}&audience=${audience}&response_type=${type}&client_id=${clientID}&redirect_uri=${redirectUri}/__silent_auth__&state=${state}&prompt=none`
     )
@@ -109,9 +147,11 @@ export default class AuthService {
           const query = parseQuery(url.split('#/')[1]);
           this.handleAuthByToken(query);
         }
+        this.loader.stop();
       })
       .catch(err => {
         console.error('Error in iFrame', err);
+        this.loader.stop();
       });
   };
 
