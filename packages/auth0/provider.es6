@@ -46,8 +46,10 @@ export default class AuthProvider extends Component {
     if (pathname.indexOf('/access_token=') === 0) {
       // extract hash routing
       const query = parseQuery(pathname.substr(1));
-      if (query.state && query.state.indexOf('__silent') !== -1) {
+      if (query.state && query.state.indexOf('__silent_login') !== -1) {
         window.close();
+        return;
+      } else if (query.state && query.state.indexOf('__silent') !== -1) {
         return;
       }
       this.login(query);

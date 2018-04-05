@@ -94,7 +94,7 @@ export default class AuthService {
       href = `${href}&email=${email}`;
     }
     if (isWebApp) {
-      href = `${href}&state=__silent`;
+      href = `${href}&state=__silent_login`;
       return createIFrame(encodeURI(href), true)
         .then(url => {
           const query = parseQuery(new URL(url).hash.substr(2));
