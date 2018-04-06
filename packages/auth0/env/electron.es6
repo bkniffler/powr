@@ -1,5 +1,5 @@
 import { ipcRenderer, remote } from 'electron';
-import AuthService from './base';
+import AuthService from './web';
 import parseQuery from '../utils/parse-query';
 
 function base64URLEncode(str) {

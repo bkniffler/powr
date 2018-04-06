@@ -8301,7 +8301,7 @@ pouchdb-adapter-websql@^6.4.3:
     pouchdb-adapter-websql-core "6.4.3"
     pouchdb-utils "6.4.3"
 
-pouchdb-ajax@6.4.3, pouchdb-ajax@~6.4.0:
+pouchdb-ajax@6.4.3:
   version "6.4.3"
   resolved "https://registry.npmjs.org/pouchdb-ajax/-/pouchdb-ajax-6.4.3.tgz#642aea957925cb9fcd6493d2f39820c34bca3e88"
   dependencies:
@@ -8339,19 +8339,7 @@ pouchdb-auth@4.0.0:
     promise-nodify "^1.0.2"
     secure-random "^1.1.1"
 
-pouchdb-authentication@^1.1.2:
-  version "1.1.2"
-  resolved "https://registry.npmjs.org/pouchdb-authentication/-/pouchdb-authentication-1.1.2.tgz#cb8a2be1dac380efdb8865f114680f92c25886ce"
-  dependencies:
-    inherits "2.0.3"
-    pouchdb-ajax "~6.4.0"
-    pouchdb-binary-utils "~6.4.0"
-    pouchdb-promise "~6.4.0"
-    pouchdb-utils "~6.4.0"
-    url-join "4.0.0"
-    url-parse "1.2.0"
-
-pouchdb-binary-utils@6.4.3, pouchdb-binary-utils@~6.4.0:
+pouchdb-binary-utils@6.4.3:
   version "6.4.3"
   resolved "https://registry.npmjs.org/pouchdb-binary-utils/-/pouchdb-binary-utils-6.4.3.tgz#ba6d9b9d289a359d47b53c1ec017fd9715a777a9"
   dependencies:
@@ -8488,7 +8476,7 @@ pouchdb-promise@5.4.3:
   dependencies:
     lie "3.0.4"
 
-pouchdb-promise@6.4.3, pouchdb-promise@^6.4.1, pouchdb-promise@~6.4.0:
+pouchdb-promise@6.4.3, pouchdb-promise@^6.4.1:
   version "6.4.3"
   resolved "https://registry.npmjs.org/pouchdb-promise/-/pouchdb-promise-6.4.3.tgz#74516f4acf74957b54debd0fb2c0e5b5a68ca7b3"
   dependencies:
@@ -8607,7 +8595,7 @@ pouchdb-update@4.0.0:
     pouchdb-req-http-query "4.0.0"
     promise-nodify "^1.0.2"
 
-pouchdb-utils@6.4.3, pouchdb-utils@~6.4.0:
+pouchdb-utils@6.4.3:
   version "6.4.3"
   resolved "https://registry.npmjs.org/pouchdb-utils/-/pouchdb-utils-6.4.3.tgz#aeb6bb8cbd8cf2d9f04e499bc3b70d1ce2a6c78a"
   dependencies:
@@ -9073,7 +9061,7 @@ read-pkg@^3.0.0:
     normalize-package-data "^2.3.2"
     path-type "^3.0.0"
 
-"readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.4, readable-stream@^2.0.5, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.9, readable-stream@^2.3.3:
+"readable-stream@1 || 2", readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.4, readable-stream@^2.0.6, readable-stream@^2.1.5, readable-stream@^2.2.2, readable-stream@^2.2.9, readable-stream@^2.3.3:
   version "2.3.5"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.5.tgz#b4f85003a938cbb6ecbce2a124fb1012bd1a838d"
   dependencies:
@@ -9113,6 +9101,18 @@ readable-stream@^2.0.2, readable-stream@^2.1.4:
     process-nextick-args "~2.0.0"
     safe-buffer "~5.1.1"
     string_decoder "~1.0.3"
+    util-deprecate "~1.0.1"
+
+readable-stream@^2.0.5:
+  version "2.3.6"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.6.tgz#b11c27d88b8ff1fbe070643cf94b0c79ae1b0aaf"
+  dependencies:
+    core-util-is "~1.0.0"
+    inherits "~2.0.3"
+    isarray "~1.0.0"
+    process-nextick-args "~2.0.0"
+    safe-buffer "~5.1.1"
+    string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
 readdirp@^2.0.0:
@@ -10164,6 +10164,12 @@ string_decoder@~1.0.3:
   dependencies:
     safe-buffer "~5.1.0"
 
+string_decoder@~1.1.1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/string_decoder/-/string_decoder-1.1.1.tgz#9cf1611ba62685d7030ae9e4ba34149c3af03fc8"
+  dependencies:
+    safe-buffer "~5.1.0"
+
 stringify-object@^3.0.0:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/stringify-object/-/stringify-object-3.2.2.tgz#9853052e5a88fb605a44cd27445aa257ad7ffbcd"
@@ -10887,13 +10893,13 @@ urix@^0.1.0, urix@~0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/urix/-/urix-0.1.0.tgz#da937f7a62e21fec1fd18d49b35c2935067a6c72"
 
-url-join@4.0.0, url-join@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
-
 url-join@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/url-join/-/url-join-1.1.0.tgz#741c6c2f4596c4830d6718460920d0c92202dc78"
+
+url-join@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.npmjs.org/url-join/-/url-join-4.0.0.tgz#4d3340e807d3773bda9991f8305acdcc2a665d2a"
 
 url-parse-lax@^1.0.0:
   version "1.0.0"
@@ -10908,7 +10914,7 @@ url-parse@1.0.x:
     querystringify "0.0.x"
     requires-port "1.0.x"
 
-url-parse@1.2.0, url-parse@^1.1.8:
+url-parse@^1.1.8:
   version "1.2.0"
   resolved "https://registry.npmjs.org/url-parse/-/url-parse-1.2.0.tgz#3a19e8aaa6d023ddd27dcc44cb4fc8f7fec23986"
   dependencies:

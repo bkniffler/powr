@@ -7,5 +7,9 @@
     "Benjamin Kniffler <bkniffler@me.com>",
     "Philipp Achenbach <powr@philipp-achenbach.de>"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "auth0-js": "^9.4.2",
+    "auth0-lock": "^11.5.2"
+  }
 }

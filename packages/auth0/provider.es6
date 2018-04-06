@@ -8,7 +8,7 @@ let Auth0;
 if (process.env.IS_ELECTRON) {
   Auth0 = require('./env/electron').default; // eslint-disable-line
 } else {
-  Auth0 = require('./env/web').default; // eslint-disable-line
+  Auth0 = require('./env/lock').default; // eslint-disable-line
 }
 
 @withPathname
