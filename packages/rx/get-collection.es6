@@ -23,7 +23,7 @@ export default class GetCollection extends Component {
   }
 }
 
-export const getCollection = (type, as) => Wrapped => props => (
+export const getCollection = (type, as = 'collection') => Wrapped => props => (
   <GetCollection type={type}>
     {collection => <Wrapped {...props} {...{ [as]: collection }} />}
   </GetCollection>
