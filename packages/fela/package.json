@@ -9,18 +9,18 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "fela": "^6.1.5",
-    "fela-monolithic": "^5.0.20",
-    "fela-plugin-custom-property": "^7.0.1",
-    "fela-plugin-embedded": "^5.2.6",
-    "fela-plugin-extend": "^6.0.4",
+    "fela": "^6.1.7",
+    "fela-monolithic": "^5.0.21",
+    "fela-plugin-custom-property": "^7.0.2",
+    "fela-plugin-embedded": "^5.2.7",
+    "fela-plugin-extend": "^6.0.5",
     "fela-plugin-fallback-value": "^5.0.17",
     "fela-plugin-friendly-pseudo-class": "^5.0.16",
     "fela-plugin-named-keys": "^1.0.2",
     "fela-plugin-prefixer": "^5.0.18",
     "fela-plugin-remove-undefined": "^5.0.19",
     "fela-plugin-unit": "^5.0.16",
-    "react-fela": "^7.1.0",
+    "react-fela": "^7.2.0",
     "tinycolor2": "^1.4.1"
   }
 }

@@ -1,7 +1,7 @@
 {
   "private": true,
-  "workspaces": ["packages/*", "../alpacka/packages/*"],
-  "workspaces2": [],
+  "workspaces": ["packages/*"],
+  "workspaces2": ["../alpacka/packages/*"],
   "version": "0.9.0",
   "name": "powr",
   "description": "",
@@ -33,8 +33,8 @@
     "@alpacka/cli": "^0.12.18",
     "@alpacka/eslint-config": "^0.12.17",
     "eslint": "^4.19.1",
-    "lerna": "^2.9.1",
-    "webpack": "^4.4.1"
+    "lerna": "^2.11.0",
+    "webpack": "^4.6.0"
   },
   "xy": {
     "jest": "^22.3.0"

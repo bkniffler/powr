@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withPush, withPathname } from './decorators';
+import { withPush, withReplace, withPathname } from './decorators';
 import { withLocation } from './link';
 
 @withLocation
@@ -8,7 +8,7 @@ class Redirect extends React.Component {
   static propTypes = {
     from: PropTypes.string,
     to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-    pathname: PropTypes.string,
+    pathname: PropTypes.string
   };
 
   componentWillMount() {
@@ -24,12 +24,13 @@ class Redirect extends React.Component {
   }
 
   perform() {
-    const { push, location, from, pathname } = this.props;
+    const { replace, location, from, pathname } = this.props;
 
     if (from && from !== pathname) {
       return;
     }
-    push(location);
+    console.log('REPLACE');
+    replace(location);
   }
 
   render() {
@@ -38,4 +39,4 @@ class Redirect extends React.Component {
   }
 }
 
-export default withPathname(withPush(Redirect));
+export default withPathname(withReplace(Redirect));

@@ -107,9 +107,9 @@ function createWindow() {
     webPreferences: {
       nodeIntegrationInWorker: true,
       nativeWindowOpen: true
-    }
-    // frame: false,
-    // titleBarStyle: 'hidden',
+    },
+    frame: false,
+    titleBarStyle: 'hiddenInset'
   });
 
   mainWindow.webContents.on(
